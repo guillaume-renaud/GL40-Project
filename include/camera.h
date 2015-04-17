@@ -45,7 +45,7 @@ private:
     SF3dVector UpVector;
     SF3dVector Position;
     SF3dVector target;
-    int toto;
+
     GLfloat RotatedX, RotatedY, RotatedZ;
 
 public:
