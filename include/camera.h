@@ -8,9 +8,13 @@
 //***************************************************************************
 #include <QGLWidget>
 //# include <Windows.h>
-#ifndef LINUX
-#include <GL/glu.h>		// Need to include it here because the GL* types are required
+
+#ifdef WIN32
+#include <GL/glu.h>
+#else
+#include <OpenGL/glu.h>
 #endif
+
 
 //#include <GL\freeglut.h>		// Need to include it here because the GL* types are required
 #define PI 3.1415926535897932384626433832795
