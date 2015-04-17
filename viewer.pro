@@ -52,7 +52,7 @@ unix:{
   ##############################################################################
   # Here to add the specific QT and BOOST paths according to your Linux system.
   # For H.W's system
-  INCLUDEPATH  += ../include   /home/ben/Downloads/boost_1_57_0
+  INCLUDEPATH  += ../include
 
   INCLUDEPATH  += /home/mansouri/Qt/5.4/gcc_64/include
 
