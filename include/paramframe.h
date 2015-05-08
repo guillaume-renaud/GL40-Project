@@ -7,7 +7,14 @@
 //
 //***************************************************************************
 
+#include <QMainWindow>
+#include <QtGui>
+
 #include <QWidget>
+#include <QMenu>
+#include <QMenuBar>
+#include <QAction>
+
 #include "paintingmesh.h"
 #include <QGroupBox>
 #include <QHeaderView>
@@ -26,6 +33,12 @@ class ParamFrame : public QWidget
     Q_OBJECT
 
 private:
+
+
+    QMenu *menuFichier, *menuOutils, *menuFenetre, *menuLangue , *menuAide;
+    QAction *actionQuitter, *actionOutilsTest, *actionFenetreTest, *actionLangueTest, *actionAideTest;
+    QMenuBar *menuBarre;
+
     QGroupBox *twoSidedGroupBox;
     QGroupBox *colorsGroupBox;
     QHBoxLayout *horizontalLayout;
@@ -49,6 +62,25 @@ private:
 public:
     explicit ParamFrame(QFrame *parent = 0)
     {
+        menuBarre = new QMenuBar();
+
+        menuFichier = menuBarre->addMenu("&Fichier");
+        menuOutils = menuBarre->addMenu("&Outils");
+        menuFenetre = menuBarre->addMenu("&Fenêtre");
+        menuLangue = menuBarre->addMenu("&Langue");
+        menuAide = menuBarre->addMenu("&Aide");
+
+        actionQuitter = new QAction("&Arrêter le programme", this);
+        actionOutilsTest = new QAction("&TestOutils", this);
+        actionFenetreTest = new QAction("&TestFenetre", this);
+        actionLangueTest = new QAction("&TestBarre", this);
+        actionAideTest = new QAction("&TestAide", this);
+
+        menuFichier->addAction(actionQuitter);
+        menuOutils->addAction(actionOutilsTest);
+        menuFenetre->addAction(actionFenetreTest);
+        menuLangue->addAction(actionLangueTest);
+        menuAide->addAction(actionAideTest);
 
         horizontalLayout = new QHBoxLayout(parent);
         horizontalLayout->setSpacing(6);
@@ -157,6 +189,7 @@ public:
         displayLRadio->setText(QApplication::translate("MainWindow", "Lines", 0));
         label->setText(QApplication::translate("MainWindow", "Display parameters", 0));
 
+        connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
 
         connect(view2DEnabledRadio, SIGNAL(clicked()), this, SLOT(updateView()));
         connect(view2DDisabledRadio, SIGNAL(clicked()), this, SLOT(updateView()));
@@ -167,9 +200,6 @@ public:
         connect(displayTRadio, SIGNAL(clicked()), this, SLOT(updateView()));
         connect(displayPRadio, SIGNAL(clicked()), this, SLOT(updateView()));
         connect(displayLRadio, SIGNAL(clicked()), this, SLOT(updateView()));
-
-
-
     }
     ~ParamFrame() {}
 
