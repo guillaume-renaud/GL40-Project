@@ -38,6 +38,8 @@ public:
     PaintingMesh *paintingMesh;
     ParamFrame *paramFrame;
 
+    //test
+
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
