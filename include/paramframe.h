@@ -41,7 +41,7 @@ private:
 
     QGroupBox *twoSidedGroupBox;
     QGroupBox *colorsGroupBox;
-    QHBoxLayout *horizontalLayout;
+    QVBoxLayout *mainVerticalLayout;
 
     QRadioButton *view2DEnabledRadio;
     QRadioButton *view2DDisabledRadio;
@@ -82,10 +82,10 @@ public:
         menuLangue->addAction(actionLangueTest);
         menuAide->addAction(actionAideTest);
 
-        horizontalLayout = new QHBoxLayout(parent);
-        horizontalLayout->setSpacing(6);
-        horizontalLayout->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout->setObjectName(QString("horizontalLayout"));
+        mainVerticalLayout = new QVBoxLayout(parent);
+        mainVerticalLayout->setSpacing(6);
+        mainVerticalLayout->setContentsMargins(11, 11, 11, 11);
+        mainVerticalLayout->setObjectName(QString("mainVerticalLayout"));
 
         label = new QLabel(parent);
         label->setObjectName(QString("label"));
@@ -97,12 +97,12 @@ public:
         label->setFont(font);
         label->raise();
 
-        horizontalLayout->addWidget(label);
+        mainVerticalLayout->addWidget(label);
 
         twoSidedGroupBox = new QGroupBox(parent);
         twoSidedGroupBox->setObjectName(QString("groupBox"));
         twoSidedGroupBox->setMaximumSize(QSize(180, 80));
-        horizontalLayout->addWidget(twoSidedGroupBox);
+        mainVerticalLayout->addWidget(twoSidedGroupBox);
 
         verticalLayout = new QVBoxLayout(twoSidedGroupBox);
         verticalLayout->setSpacing(6);
@@ -124,7 +124,7 @@ public:
         colorsGroupBox->setObjectName(QString("groupBox_2"));
         colorsGroupBox->setMaximumSize(QSize(180, 80));
 
-        horizontalLayout->addWidget(colorsGroupBox);
+        mainVerticalLayout->addWidget(colorsGroupBox);
 
         verticalLayout_2 = new QVBoxLayout(colorsGroupBox);
         verticalLayout_2->setSpacing(6);
@@ -145,9 +145,9 @@ public:
 
         displayGroupBox = new QGroupBox(parent);
         displayGroupBox->setObjectName(QString("groupBox_3"));
-        displayGroupBox->setMinimumSize(QSize(310, 80));
-        displayGroupBox->setMaximumSize(QSize(310, 80));
-        horizontalLayout->addWidget(displayGroupBox);
+        displayGroupBox->setMinimumSize(QSize(100, 80));
+        displayGroupBox->setMaximumSize(QSize(180, 140));
+        mainVerticalLayout->addWidget(displayGroupBox);
 
         gridLayout_2 = new QGridLayout(displayGroupBox);
         gridLayout_2->setSpacing(6);
@@ -171,10 +171,10 @@ public:
         displayLRadio->setGeometry(QRect(230, 60, 117, 22));
 
         displayMRadio->setChecked(true);
-        gridLayout_2->addWidget(displayMRadio, 0, 0, 1, 1);
-        gridLayout_2->addWidget(displayTRadio, 0, 1, 1, 1);
-        gridLayout_2->addWidget(displayPRadio, 1, 0, 1, 1);
-        gridLayout_2->addWidget(displayLRadio, 1, 1, 1, 1);
+        gridLayout_2->addWidget(displayMRadio, 0, 0, 1, 2);
+        gridLayout_2->addWidget(displayTRadio, 1, 0, 1, 2);
+        gridLayout_2->addWidget(displayPRadio, 2, 0, 1, 2);
+        gridLayout_2->addWidget(displayLRadio, 3, 0, 1, 2);
 
         twoSidedGroupBox->setTitle(QApplication::translate("MainWindow", "2D-3D", 0));
         view2DEnabledRadio->setText(QApplication::translate("MainWindow", "2D", 0));
@@ -187,7 +187,7 @@ public:
         displayTRadio->setText(QApplication::translate("MainWindow", "Triangles", 0));
         displayPRadio->setText(QApplication::translate("MainWindow", "Points", 0));
         displayLRadio->setText(QApplication::translate("MainWindow", "Lines", 0));
-        label->setText(QApplication::translate("MainWindow", "Display parameters", 0));
+        label->setText(QApplication::translate("MainWindow", "Display\nparameters", 0));
 
         connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
 

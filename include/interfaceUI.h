@@ -58,22 +58,22 @@ public:
 
             frame = new QFrame(centralWidget);
             frame->setObjectName(QString("frame"));
-            frame->setMaximumSize(QSize(16777215, 101));
-            frame->setSizeIncrement(QSize(0, 0));
+            frame->setMaximumSize(QSize(140, 16777215));
             frame->setFrameShape(QFrame::StyledPanel);
             frame->setFrameShadow(QFrame::Raised);
 
-            gridLayout->addWidget(frame, 0, 0, 1, 2);
+            gridLayout->addWidget(frame, 0, 0, 1, 1);
 
             paramFrame = new ParamFrame(frame);
 
             frame_2 = new QFrame(centralWidget);
             frame_2->setObjectName(QString("frame_2"));
-            frame_2->setMaximumSize(QSize(120, 16777215));
+            frame_2->setMaximumSize(QSize(16777215, 101));
+            frame->setSizeIncrement(QSize(0, 0));
             frame_2->setFrameShape(QFrame::StyledPanel);
             frame_2->setFrameShadow(QFrame::Raised);
 
-            gridLayout->addWidget(frame_2, 1, 0, 1, 1);
+            gridLayout->addWidget(frame_2, 1, 0, 1, 2);
 
             Mesh = new QWidget(centralWidget);
             Mesh->setObjectName(QString("Mesh"));
@@ -89,7 +89,7 @@ public:
 
             gridLayout_5->addWidget(paintingMesh);
 
-            gridLayout->addWidget(Mesh, 1, 1, 1, 1);
+            gridLayout->addWidget(Mesh, 0, 1, 1, 1);
         MainWindow->setCentralWidget(centralWidget);
         retranslateUi(MainWindow);
 
