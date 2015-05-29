@@ -9,14 +9,14 @@
 #include "paintingmesh.h"
 #include <QGroupBox>
 #include <QHeaderView>
-#include <QRadioButton>
+#include <QPushButton>
 #include <QApplication>
 #include <QLabel>
 #include <QHBoxLayout>
 
 QT_BEGIN_NAMESPACE
 class QGroupBox;
-class QRadioButton;
+class QPushButton;
 QT_END_NAMESPACE
 
 class OptionFrame : public QWidget
@@ -30,7 +30,7 @@ private:
     QHBoxLayout *mainHorizontalLayout;
     QGroupBox *optionsGroupBox;
     QGridLayout *gridLayout;
-    QRadioButton *optionView1, *optionView2, *optionView3, *optionView4, *optionView5, *optionView6;
+    QPushButton *optionView1, *optionView2, *optionView3, *optionView4, *optionView5, *optionView6;
     CCamera* camera;
 
 public:
@@ -56,7 +56,7 @@ public:
         optionsGroupBox = new QGroupBox(parent);
         optionsGroupBox->setObjectName(QString("optionsGroupBox"));
         optionsGroupBox->setMinimumSize(QSize(100, 80));
-        optionsGroupBox->setMaximumSize(QSize(260, 200));
+        optionsGroupBox->setMaximumSize(QSize(400, 300));
         mainHorizontalLayout->addWidget(optionsGroupBox);
 
         gridLayout = new QGridLayout(optionsGroupBox);
@@ -64,37 +64,31 @@ public:
         gridLayout->setContentsMargins(11, 11, 11, 11);
         gridLayout->setObjectName(QString("gridLayout"));
 
-        optionView1 = new QRadioButton(optionsGroupBox);
+        optionView1 = new QPushButton(optionsGroupBox);
         optionView1->setObjectName(QString("radioButton_View1"));
-        optionView1->setGeometry(QRect(30, 30, 117, 22));
 
-        optionView2 = new QRadioButton(optionsGroupBox);
+        optionView2 = new QPushButton(optionsGroupBox);
         optionView2->setObjectName(QString("radioButton_View2"));
-        optionView2->setGeometry(QRect(30, 60, 117, 22));
 
-        optionView3 = new QRadioButton(optionsGroupBox);
+        optionView3 = new QPushButton(optionsGroupBox);
         optionView3->setObjectName(QString("radioButton_View3"));
-        optionView3->setGeometry(QRect(230, 30, 117, 22));
 
-        optionView4 = new QRadioButton(optionsGroupBox);
+        optionView4 = new QPushButton(optionsGroupBox);
         optionView4->setObjectName(QString("radioButton_View4"));
-        optionView4->setGeometry(QRect(230, 60, 117, 22));
 
-        optionView5 = new QRadioButton(optionsGroupBox);
+        optionView5 = new QPushButton(optionsGroupBox);
         optionView5->setObjectName(QString("radioButton_View5"));
-        optionView5->setGeometry(QRect(230, 30, 117, 22));
 
-        optionView6 = new QRadioButton(optionsGroupBox);
+        optionView6 = new QPushButton(optionsGroupBox);
         optionView6->setObjectName(QString("radioButton_View6"));
-        optionView6->setGeometry(QRect(230, 60, 117, 22));
 
         optionView1->setChecked(true);
-        gridLayout->addWidget(optionView1, 0, 0, 1, 2);
-        gridLayout->addWidget(optionView2, 0, 1, 1, 2);
-        gridLayout->addWidget(optionView3, 0, 2, 1, 1);
-        gridLayout->addWidget(optionView4, 1, 0, 1, 2);
-        gridLayout->addWidget(optionView5, 1, 1, 1, 2);
-        gridLayout->addWidget(optionView6, 1, 2, 1, 1);
+        gridLayout->addWidget(optionView1, 0, 0);
+        gridLayout->addWidget(optionView2, 0, 1);
+        gridLayout->addWidget(optionView3, 0, 2);
+        gridLayout->addWidget(optionView4, 1, 0);
+        gridLayout->addWidget(optionView5, 1, 1);
+        gridLayout->addWidget(optionView6, 1, 2);
 
         optionsGroupBox->setTitle(QApplication::translate("MainWindow", "Views", 0));
         optionView1->setText(QApplication::translate("MainWindow", "View1", 0));
@@ -105,6 +99,18 @@ public:
         optionView6->setText(QApplication::translate("MainWindow", "View6", 0));
         label->setText(QApplication::translate("MainWindow", "Visualization Options", 0));
 
+        connect(optionView1, SIGNAL(clicked()), this, SLOT(view1()));
+        optionView1->setShortcut(QKeySequence("1"));
+        connect(optionView2, SIGNAL(clicked()), this, SLOT(view2()));
+        optionView1->setShortcut(QKeySequence("3"));
+        connect(optionView3, SIGNAL(clicked()), this, SLOT(view3()));
+        optionView1->setShortcut(QKeySequence("7"));
+        connect(optionView4, SIGNAL(clicked()), this, SLOT(view4()));
+        optionView1->setShortcut(QKeySequence("ctrl+1"));
+        connect(optionView5, SIGNAL(clicked()), this, SLOT(view5()));
+        optionView1->setShortcut(QKeySequence("ctrl+2"));
+        connect(optionView6, SIGNAL(clicked()), this, SLOT(view6()));
+        optionView1->setShortcut(QKeySequence("ctrl+7"));
     }
 
     ~OptionFrame() {}
@@ -117,32 +123,29 @@ public:
 
 private slots:
 
-    void updateCamera()
+    void view1()
     {
-        if (optionView1->isChecked())
-        {
-            this->camera->LookAt(5, 0, 0, 0, 1, 0, 0, 0, 0);
-        }
-        else if(optionView2->isChecked())
-        {
-
-        }
-        else if(optionView3->isChecked())
-        {
-
-        }
-        else if(optionView4->isChecked())
-        {
-
-        }
-        else if(optionView5->isChecked())
-        {
-
-        }
-        else if(optionView6->isChecked())
-        {
-
-        }
+        this->camera->LookAt(1, 0, -10, 0, 1, 0, 0, 0, -10);
+    }
+    void view2()
+    {
+        this->camera->LookAt(0, 0, -11, 0, 1, 0, 0, 0, -10);
+    }
+    void view3()
+    {
+        this->camera->LookAt(0, 1, -10, 0, 1, 0, 0, 0, -10);
+    }
+    void view4()
+    {
+        this->camera->LookAt(-1, 0, -10, 0, 1, 0, 0, 0, -10);
+    }
+    void view5()
+    {
+        this->camera->LookAt(0, 0, -9, 0, 1, 0, 0, 0, -10);
+    }
+    void view6()
+    {
+        this->camera->LookAt(0, -1, -10, 0, 1, 0, 0, 0, -10);
     }
 };
 

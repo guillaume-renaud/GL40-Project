@@ -368,6 +368,7 @@ private:
 
             glDrawArrays(GL_LINE_STRIP, 0, mat_points.getWidth());
         }
+
     }
     void displayTriangles()
     {
