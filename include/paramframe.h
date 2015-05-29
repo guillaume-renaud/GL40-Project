@@ -7,13 +7,9 @@
 //
 //***************************************************************************
 
+#include <stdio.h>
 #include <QMainWindow>
 #include <QtGui>
-
-#include <QWidget>
-#include <QMenu>
-#include <QMenuBar>
-#include <QAction>
 
 #include "paintingmesh.h"
 #include <QGroupBox>
@@ -22,6 +18,7 @@
 #include <QApplication>
 #include <QLabel>
 #include <QHBoxLayout>
+#include <QString>
 
 QT_BEGIN_NAMESPACE
 class QGroupBox;
@@ -33,18 +30,6 @@ class ParamFrame : public QWidget
     Q_OBJECT
 
 private:
-    QMenu *menuFichier, *menuOutils, *menuFenetre, *menuLangue , *menuAide;
-    QAction *actionQuitter, *actionOutilsTest, *actionFenetreTest, *actionLangueTest, *actionAideTest;
-    QMenuBar *menuBarre;
-
-    QGroupBox *twoSidedGroupBox;
-    QGroupBox *colorsGroupBox;
-    QVBoxLayout *mainVerticalLayout;
-
-    QRadioButton *view2DEnabledRadio;
-    QRadioButton *view2DDisabledRadio;
-    QRadioButton *colorsEnabledRadio;
-    QRadioButton *colorsDisabledRadio;
 
     QGroupBox *displayGroupBox;
     QRadioButton *displayMRadio;
@@ -56,30 +41,19 @@ private:
     QVBoxLayout *verticalLayout_2;
     QGridLayout *gridLayout_2;
 
+    QGroupBox *twoSidedGroupBox;
+    QGroupBox *colorsGroupBox;
+    QVBoxLayout *mainVerticalLayout;
+
+    QRadioButton *view2DEnabledRadio;
+    QRadioButton *view2DDisabledRadio;
+    QRadioButton *colorsEnabledRadio;
+    QRadioButton *colorsDisabledRadio;
+
     PaintingMesh *pme;
 public:
     explicit ParamFrame(QFrame *parent = 0)
     {
-        menuBarre = new QMenuBar();
-
-        menuFichier = menuBarre->addMenu("&Fichier");
-        menuOutils = menuBarre->addMenu("&Outils");
-        menuFenetre = menuBarre->addMenu("&Fenêtre");
-        menuLangue = menuBarre->addMenu("&Langue");
-        menuAide = menuBarre->addMenu("&Aide");
-
-        actionQuitter = new QAction("&Arrêter le programme", this);
-        actionOutilsTest = new QAction("&TestOutils", this);
-        actionFenetreTest = new QAction("&TestFenetre", this);
-        actionLangueTest = new QAction("&TestBarre", this);
-        actionAideTest = new QAction("&TestAide", this);
-
-        menuFichier->addAction(actionQuitter);
-        menuOutils->addAction(actionOutilsTest);
-        menuFenetre->addAction(actionFenetreTest);
-        menuLangue->addAction(actionLangueTest);
-        menuAide->addAction(actionAideTest);
-
         mainVerticalLayout = new QVBoxLayout(parent);
         mainVerticalLayout->setSpacing(6);
         mainVerticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -185,8 +159,6 @@ public:
         displayPRadio->setText(QApplication::translate("MainWindow", "Points", 0));
         displayLRadio->setText(QApplication::translate("MainWindow", "Lines", 0));
         label->setText(QApplication::translate("MainWindow", "Display\nparameters", 0));
-
-        connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
 
         connect(view2DEnabledRadio, SIGNAL(clicked()), this, SLOT(updateView()));
         connect(view2DDisabledRadio, SIGNAL(clicked()), this, SLOT(updateView()));

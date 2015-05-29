@@ -50,7 +50,6 @@ public:
         mainVerticalLayout->addWidget(label);
 
         label->setText(QApplication::translate("MainWindow", "Interactions", 0));
-
     }
 
     ~InteractionFrame() {}

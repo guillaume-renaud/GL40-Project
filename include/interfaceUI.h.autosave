@@ -178,7 +178,7 @@ private slots :
 
     void translateEN()
     {
-
+        
     }
 
     void translateFR()
