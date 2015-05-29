@@ -33,8 +33,6 @@ class ParamFrame : public QWidget
     Q_OBJECT
 
 private:
-
-
     QMenu *menuFichier, *menuOutils, *menuFenetre, *menuLangue , *menuAide;
     QAction *actionQuitter, *actionOutilsTest, *actionFenetreTest, *actionLangueTest, *actionAideTest;
     QMenuBar *menuBarre;
@@ -108,7 +106,6 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QString("verticalLayout"));
-
 
         view2DEnabledRadio = new QRadioButton(twoSidedGroupBox);
         view2DEnabledRadio->setObjectName(QString("radioButton"));

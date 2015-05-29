@@ -22,7 +22,8 @@
 #include "paintingmesh.h"
 #include "paramframe.h"
 #include <QMainWindow>
-#include "paramframe.h"
+#include "optionframe.h"
+#include "interactionframe.h"
 
 
 class Ui_MainWindow
@@ -32,64 +33,78 @@ public:
     QWidget *centralWidget;
     QGridLayout *gridLayout;
     QFrame *frame;
-    QFrame *frame_2;
+    QFrame *frameBottom, *frameRight;
     QWidget *Mesh;
     QGridLayout *gridLayout_5;
     PaintingMesh *paintingMesh;
     ParamFrame *paramFrame;
-
-    //test
+    OptionFrame *optionFrame;
+    InteractionFrame *interactionFrame;
 
     void setupUi(QMainWindow *MainWindow)
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QString("MainWindow"));
-            MainWindow->resize(1000, 750);
-            MainWindow->setAnimated(true);
 
-            centralWidget = new QWidget(MainWindow);
-            centralWidget->setObjectName(QString("centralWidget"));
-            centralWidget->setEnabled(true);
+        MainWindow->resize(1000, 750);
+        MainWindow->setAnimated(true);
 
-            gridLayout = new QGridLayout(centralWidget);
-            gridLayout->setSpacing(6);
-            gridLayout->setContentsMargins(11, 11, 11, 11);
-            gridLayout->setObjectName(QString("gridLayout"));
+        centralWidget = new QWidget(MainWindow);
+        centralWidget->setObjectName(QString("centralWidget"));
+        centralWidget->setEnabled(true);
 
-            frame = new QFrame(centralWidget);
-            frame->setObjectName(QString("frame"));
-            frame->setMaximumSize(QSize(140, 16777215));
-            frame->setFrameShape(QFrame::StyledPanel);
-            frame->setFrameShadow(QFrame::Raised);
+        gridLayout = new QGridLayout(centralWidget);
+        gridLayout->setSpacing(6);
+        gridLayout->setContentsMargins(11, 11, 11, 11);
+        gridLayout->setObjectName(QString("gridLayout"));
 
-            gridLayout->addWidget(frame, 0, 0, 1, 1);
+        frame = new QFrame(centralWidget);
+        frame->setObjectName(QString("frame"));
+        frame->setMaximumSize(QSize(140, 16777215));
+        frame->setFrameShape(QFrame::StyledPanel);
+        frame->setFrameShadow(QFrame::Raised);
 
-            paramFrame = new ParamFrame(frame);
+        gridLayout->addWidget(frame, 0, 0, 1, 1);
 
-            frame_2 = new QFrame(centralWidget);
-            frame_2->setObjectName(QString("frame_2"));
-            frame_2->setMaximumSize(QSize(16777215, 101));
-            frame->setSizeIncrement(QSize(0, 0));
-            frame_2->setFrameShape(QFrame::StyledPanel);
-            frame_2->setFrameShadow(QFrame::Raised);
+        paramFrame = new ParamFrame(frame);
 
-            gridLayout->addWidget(frame_2, 1, 0, 1, 2);
+        frameBottom = new QFrame(centralWidget);
+        frameBottom->setObjectName(QString("frameBottom"));
+        frameBottom->setMaximumSize(QSize(16777215, 101));
+        frameBottom->setSizeIncrement(QSize(0, 0));
+        frameBottom->setFrameShape(QFrame::StyledPanel);
+        frameBottom->setFrameShadow(QFrame::Raised);
 
-            Mesh = new QWidget(centralWidget);
-            Mesh->setObjectName(QString("Mesh"));
-            Mesh->setEnabled(true);
+        gridLayout->addWidget(frameBottom, 1, 0, 1, 0);
 
-            gridLayout_5 = new QGridLayout(Mesh);
-            gridLayout_5->setSpacing(6);
-            gridLayout_5->setContentsMargins(11, 11, 11, 11);
-            gridLayout_5->setObjectName(QString("gridLayout_5"));
+        optionFrame = new OptionFrame(frameBottom);
 
-            paintingMesh = new PaintingMesh(Mesh);
-            paintingMesh->setObjectName(QString("paintingMesh"));
+        Mesh = new QWidget(centralWidget);
+        Mesh->setObjectName(QString("Mesh"));
+        Mesh->setEnabled(true);
 
-            gridLayout_5->addWidget(paintingMesh);
+        gridLayout_5 = new QGridLayout(Mesh);
+        gridLayout_5->setSpacing(6);
+        gridLayout_5->setContentsMargins(11, 11, 11, 11);
+        gridLayout_5->setObjectName(QString("gridLayout_5"));
 
-            gridLayout->addWidget(Mesh, 0, 1, 1, 1);
+        paintingMesh = new PaintingMesh(Mesh);
+        paintingMesh->setObjectName(QString("paintingMesh"));
+
+        gridLayout_5->addWidget(paintingMesh);
+
+        gridLayout->addWidget(Mesh, 0, 1, 1, 1);
+
+        frameRight = new QFrame(centralWidget);
+        frameRight->setObjectName(QString("frame"));
+        frameRight->setMaximumSize(QSize(140, 16777215));
+        frameRight->setFrameShape(QFrame::StyledPanel);
+        frameRight->setFrameShadow(QFrame::Raised);
+
+        gridLayout->addWidget(frameRight, 0, 2, 1, 1);
+
+        interactionFrame = new InteractionFrame(frameRight);
+
         MainWindow->setCentralWidget(centralWidget);
         retranslateUi(MainWindow);
 

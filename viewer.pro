@@ -22,7 +22,9 @@ HEADERS      += \
     include/paintingmesh.h \
     include/ctrlwidget.h \
     include/camera.h \
-    include/interfaceUI.h
+    include/interfaceUI.h \
+    include/optionframe.h \
+    include/interactionframe.h
 
 FORMS        +=
 
