@@ -95,6 +95,8 @@ public:
 
         gridLayout->addWidget(Mesh, 0, 1, 1, 1);
 
+        this->optionFrame->setCamera(this->paintingMesh->getCamera());
+
         frameRight = new QFrame(centralWidget);
         frameRight->setObjectName(QString("frame"));
         frameRight->setMaximumSize(QSize(140, 16777215));

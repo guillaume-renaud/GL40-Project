@@ -273,6 +273,7 @@ protected:
 
             updateGL();
         }
+
         lastPos = event->pos();
     }
     void wheelEvent(QWheelEvent *event)
@@ -508,6 +509,8 @@ public:
         qp->setPen(pen);
         qp->drawLine(20, 80, 250, 80);
     }
+
+    CCamera* getCamera() {return &this->camera;}
 };
 
 

@@ -65,6 +65,8 @@ public:
     void MoveUpward ( GLfloat Distance );
     void StrafeRight ( GLfloat Distance );
 
+    void LookAt(GLfloat x, GLfloat y, GLfloat z, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat focusX, GLfloat focusY, GLfloat focusZ);
+
 };
 
 #endif

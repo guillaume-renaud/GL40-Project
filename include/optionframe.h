@@ -31,6 +31,7 @@ private:
     QGroupBox *optionsGroupBox;
     QGridLayout *gridLayout;
     QRadioButton *optionView1, *optionView2, *optionView3, *optionView4, *optionView5, *optionView6;
+    CCamera* camera;
 
 public:
     explicit OptionFrame(QFrame *parent = 0)
@@ -112,13 +113,15 @@ public:
         this->pme = pme;
     }
 
+    void setCamera(CCamera* camera) {this->camera = camera;}
+
 private slots:
 
     void updateCamera()
     {
         if (optionView1->isChecked())
         {
-
+            this->camera->LookAt(5, 0, 0, 0, 1, 0, 0, 0, 0);
         }
         else if(optionView2->isChecked())
         {
