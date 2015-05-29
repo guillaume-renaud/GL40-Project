@@ -111,6 +111,36 @@ public:
     void setWidgetsLink( PaintingMesh *pme) {
         this->pme = pme;
     }
+
+private slots:
+
+    void updateCamera()
+    {
+        if (optionView1->isChecked())
+        {
+
+        }
+        else if(optionView2->isChecked())
+        {
+
+        }
+        else if(optionView3->isChecked())
+        {
+
+        }
+        else if(optionView4->isChecked())
+        {
+
+        }
+        else if(optionView5->isChecked())
+        {
+
+        }
+        else if(optionView6->isChecked())
+        {
+
+        }
+    }
 };
 
 #endif // OPTIONFRAME_H
