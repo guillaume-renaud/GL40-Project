@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_OptionFrame_t {
-    QByteArrayData data[3];
-    char stringdata[26];
+    QByteArrayData data[8];
+    char stringdata[49];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,11 +30,17 @@ struct qt_meta_stringdata_OptionFrame_t {
 static const qt_meta_stringdata_OptionFrame_t qt_meta_stringdata_OptionFrame = {
     {
 QT_MOC_LITERAL(0, 0, 11), // "OptionFrame"
-QT_MOC_LITERAL(1, 12, 12), // "updateCamera"
-QT_MOC_LITERAL(2, 25, 0) // ""
+QT_MOC_LITERAL(1, 12, 5), // "view1"
+QT_MOC_LITERAL(2, 18, 0), // ""
+QT_MOC_LITERAL(3, 19, 5), // "view2"
+QT_MOC_LITERAL(4, 25, 5), // "view3"
+QT_MOC_LITERAL(5, 31, 5), // "view4"
+QT_MOC_LITERAL(6, 37, 5), // "view5"
+QT_MOC_LITERAL(7, 43, 5) // "view6"
 
     },
-    "OptionFrame\0updateCamera\0"
+    "OptionFrame\0view1\0\0view2\0view3\0view4\0"
+    "view5\0view6"
 };
 #undef QT_MOC_LITERAL
 
@@ -44,7 +50,7 @@ static const uint qt_meta_data_OptionFrame[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -52,9 +58,19 @@ static const uint qt_meta_data_OptionFrame[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       1,    0,   19,    2, 0x08 /* Private */,
+       1,    0,   44,    2, 0x08 /* Private */,
+       3,    0,   45,    2, 0x08 /* Private */,
+       4,    0,   46,    2, 0x08 /* Private */,
+       5,    0,   47,    2, 0x08 /* Private */,
+       6,    0,   48,    2, 0x08 /* Private */,
+       7,    0,   49,    2, 0x08 /* Private */,
 
  // slots: parameters
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
+    QMetaType::Void,
     QMetaType::Void,
 
        0        // eod
@@ -65,7 +81,12 @@ void OptionFrame::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
     if (_c == QMetaObject::InvokeMetaMethod) {
         OptionFrame *_t = static_cast<OptionFrame *>(_o);
         switch (_id) {
-        case 0: _t->updateCamera(); break;
+        case 0: _t->view1(); break;
+        case 1: _t->view2(); break;
+        case 2: _t->view3(); break;
+        case 3: _t->view4(); break;
+        case 4: _t->view5(); break;
+        case 5: _t->view6(); break;
         default: ;
         }
     }
@@ -97,13 +118,13 @@ int OptionFrame::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 6)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 6;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 1)
+        if (_id < 6)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 1;
+        _id -= 6;
     }
     return _id;
 }

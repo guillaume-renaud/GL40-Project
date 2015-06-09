@@ -213,4 +213,17 @@ void CCamera::MoveUpward( GLfloat Distance )
     Position = Position + (UpVector*Distance);
 }
 
+void CCamera::LookAt(GLfloat x, GLfloat y, GLfloat z, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat focusX, GLfloat focusY, GLfloat focusZ)
+{
+    this->Position.x = x;
+    this->Position.y = y;
+    this->Position.z = z;
 
+    this->UpVector.x = upX;
+    this->UpVector.y = upY;
+    this->UpVector.z = upZ;
+
+    this->ViewDir.x = focusX;
+    this->ViewDir.y = focusY;
+    this->ViewDir.z = focusZ;
+}

@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Ui_MainWindow_t {
     QByteArrayData data[4];
-    char stringdata[37];
+    char stringdata[39];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,10 +32,10 @@ static const qt_meta_stringdata_Ui_MainWindow_t qt_meta_stringdata_Ui_MainWindow
 QT_MOC_LITERAL(0, 0, 13), // "Ui_MainWindow"
 QT_MOC_LITERAL(1, 14, 14), // "updateLanguage"
 QT_MOC_LITERAL(2, 29, 0), // ""
-QT_MOC_LITERAL(3, 30, 6) // "langue"
+QT_MOC_LITERAL(3, 30, 8) // "language"
 
     },
-    "Ui_MainWindow\0updateLanguage\0\0langue"
+    "Ui_MainWindow\0updateLanguage\0\0language"
 };
 #undef QT_MOC_LITERAL
 

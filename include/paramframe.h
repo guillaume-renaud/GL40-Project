@@ -147,19 +147,6 @@ public:
         gridLayout_2->addWidget(displayPRadio, 2, 0, 1, 2);
         gridLayout_2->addWidget(displayLRadio, 3, 0, 1, 2);
 
-        twoSidedGroupBox->setTitle(QApplication::translate("MainWindow", "2D-3D", 0));
-        view2DEnabledRadio->setText(QApplication::translate("MainWindow", "2D", 0));
-        view2DDisabledRadio->setText(QApplication::translate("MainWindow", "3D", 0));
-        colorsGroupBox->setTitle(QApplication::translate("MainWindow", "Colors", 0));
-        colorsEnabledRadio->setText(QApplication::translate("MainWindow", "Enabled", 0));
-        colorsDisabledRadio->setText(QApplication::translate("MainWindow", "Disabled", 0));
-        displayGroupBox->setTitle(QApplication::translate("MainWindow", "Display", 0));
-        displayMRadio->setText(QApplication::translate("MainWindow", "Mesh", 0));
-        displayTRadio->setText(QApplication::translate("MainWindow", "Triangles", 0));
-        displayPRadio->setText(QApplication::translate("MainWindow", "Points", 0));
-        displayLRadio->setText(QApplication::translate("MainWindow", "Lines", 0));
-        label->setText(QApplication::translate("MainWindow", "Display\nparameters", 0));
-
         connect(view2DEnabledRadio, SIGNAL(clicked()), this, SLOT(updateView()));
         connect(view2DDisabledRadio, SIGNAL(clicked()), this, SLOT(updateView()));
         connect(colorsEnabledRadio, SIGNAL(clicked()), this, SLOT(updateView()));
@@ -175,6 +162,68 @@ public:
     void setWidgetsLink( PaintingMesh *pme) {
         this->pme = pme;
     }
+
+    void translateTwoSidedGroupBox(char* txt)
+    {
+        twoSidedGroupBox->setTitle(QApplication::translate("MainWindow", txt, 0));
+    }
+
+    void translateView2DEnabledRadio(char* txt)
+    {
+        view2DEnabledRadio->setText(QApplication::translate("MainWindow", txt, 0));
+    }
+
+    void translateView2DDisabledRadio(char* txt)
+    {
+        view2DDisabledRadio->setText(QApplication::translate("MainWindow", txt, 0));
+    }
+
+    void translateColorsGroupBox(char* txt)
+    {
+        colorsGroupBox->setTitle(QApplication::translate("MainWindow", txt, 0));
+    }
+
+    void translateColorsEnabledRadio(char* txt)
+    {
+        colorsEnabledRadio->setText(QApplication::translate("MainWindow", txt, 0));
+    }
+
+    void translateColorsDisabledRadio(char* txt)
+    {
+        colorsDisabledRadio->setText(QApplication::translate("MainWindow", txt, 0));
+    }
+
+    void translateDisplayGroupBox(char* txt)
+    {
+        displayGroupBox->setTitle(QApplication::translate("MainWindow", txt, 0));
+    }
+
+    void translateDisplayMRadio(char* txt)
+    {
+        displayMRadio->setText(QApplication::translate("MainWindow", txt, 0));
+    }
+
+    void translateDisplayTRadio(char* txt)
+    {
+        displayTRadio->setText(QApplication::translate("MainWindow", txt, 0));
+    }
+
+    void translateDisplayPRadio(char* txt)
+    {
+        displayPRadio->setText(QApplication::translate("MainWindow", txt, 0));
+    }
+
+    void translateDisplayLRadio(char* txt)
+    {
+        displayLRadio->setText(QApplication::translate("MainWindow", txt, 0));
+    }
+
+    void translateLabel(char* txt)
+    {
+        label->setText(QApplication::translate("MainWindow", txt, 0));
+    }
+
+
 
 private slots:
 
@@ -205,5 +254,7 @@ private slots:
     }
 
 };
+
+
 
 #endif // PARAMFRAME_H

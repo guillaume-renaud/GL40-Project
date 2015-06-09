@@ -48,8 +48,6 @@ public:
         label->raise();
 
         mainVerticalLayout->addWidget(label);
-
-        label->setText(QApplication::translate("MainWindow", "Interactions", 0));
     }
 
     ~InteractionFrame() {}
@@ -57,6 +55,12 @@ public:
     void setWidgetsLink( PaintingMesh *pme) {
         this->pme = pme;
     }
+
+    void translateLabel(char* txt)
+    {
+        label->setText(QApplication::translate("MainWindow", txt, 0));
+    }
+
 };
 
 
