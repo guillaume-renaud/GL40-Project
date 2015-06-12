@@ -226,4 +226,10 @@ void CCamera::LookAt(GLfloat x, GLfloat y, GLfloat z, GLfloat upX, GLfloat upY, 
     this->ViewDir.x = focusX;
     this->ViewDir.y = focusY;
     this->ViewDir.z = focusZ;
+
+    this->RotatedX = 0;
+    this->RotatedY = 0;
+    this->RotatedZ = 0;
+
+    notify();
 }

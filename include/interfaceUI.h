@@ -131,7 +131,9 @@ public:
 
         gridLayout->addWidget(Mesh, 0, 1, 1, 1);
 
+        this->paintingMesh->getCamera()->addObserver(this->paintingMesh);
         this->optionFrame->setCamera(this->paintingMesh->getCamera());
+        paramFrame->addObserver(paintingMesh);
 
         frameRight = new QFrame(centralWidget);
         frameRight->setObjectName(QString("frame"));

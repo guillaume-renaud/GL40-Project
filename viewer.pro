@@ -24,7 +24,8 @@ HEADERS      += \
     include/camera.h \
     include/interfaceUI.h \
     include/optionframe.h \
-    include/interactionframe.h
+    include/interactionframe.h \
+    include/observer.h
 
 FORMS        +=
 

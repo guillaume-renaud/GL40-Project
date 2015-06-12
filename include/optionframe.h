@@ -93,15 +93,15 @@ public:
         connect(optionView1, SIGNAL(clicked()), this, SLOT(view1()));
         optionView1->setShortcut(QKeySequence("1"));
         connect(optionView2, SIGNAL(clicked()), this, SLOT(view2()));
-        optionView1->setShortcut(QKeySequence("3"));
+        optionView2->setShortcut(QKeySequence("2"));
         connect(optionView3, SIGNAL(clicked()), this, SLOT(view3()));
-        optionView1->setShortcut(QKeySequence("7"));
+        optionView3->setShortcut(QKeySequence("3"));
         connect(optionView4, SIGNAL(clicked()), this, SLOT(view4()));
-        optionView1->setShortcut(QKeySequence("ctrl+1"));
+        optionView4->setShortcut(QKeySequence("4"));
         connect(optionView5, SIGNAL(clicked()), this, SLOT(view5()));
-        optionView1->setShortcut(QKeySequence("ctrl+2"));
+        optionView5->setShortcut(QKeySequence("5"));
         connect(optionView6, SIGNAL(clicked()), this, SLOT(view6()));
-        optionView1->setShortcut(QKeySequence("ctrl+7"));
+        optionView6->setShortcut(QKeySequence("6"));
     }
 
     ~OptionFrame() {}
@@ -156,27 +156,27 @@ private slots:
 
     void view1()
     {
-        this->camera->LookAt(1, 0, -10, 0, 1, 0, 0, 0, -10);
+        this->camera->LookAt(0, 0, 0, 0, 1, 0, 0, 0, -1);
     }
     void view2()
     {
-        this->camera->LookAt(0, 0, -11, 0, 1, 0, 0, 0, -10);
+        this->camera->LookAt(10, 0, -6, 0, 1, 0, -1, 0, 0);
     }
     void view3()
     {
-        this->camera->LookAt(0, 1, -10, 0, 1, 0, 0, 0, -10);
+        this->camera->LookAt(0, 10.1, -6, 0, 1, 0, 0, -1, 0.1);
     }
     void view4()
     {
-        this->camera->LookAt(-1, 0, -10, 0, 1, 0, 0, 0, -10);
+        this->camera->LookAt(0, 0, -10, 0, 1, 0, 0, 0, 1);
     }
     void view5()
     {
-        this->camera->LookAt(0, 0, -9, 0, 1, 0, 0, 0, -10);
+        this->camera->LookAt(-10, 0, -6, 0, 1, 0, 1, 0, 0);
     }
     void view6()
     {
-        this->camera->LookAt(0, -1, -10, 0, 1, 0, 0, 0, -10);
+        this->camera->LookAt(0, -10.1, -6, 0, 1, 0, 0, 1, 0.1);
     }
 };
 
