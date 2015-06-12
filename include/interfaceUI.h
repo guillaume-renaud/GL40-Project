@@ -11,6 +11,7 @@
 #include <QButtonGroup>
 #include <QRadioButton>
 #include <QGroupBox>
+#include <QMessageBox>
 
 #include <QWidget>
 #include <QMenu>
@@ -50,6 +51,7 @@ public:
     QMenu *menuFichier, *menuOutils, *menuFenetre, *menuLangue , *menuAide;
     QAction *actionQuitter, *actionOutilsTest, *actionFenetreTest, *actionLangueAnglais, *actionLangueFrancais, *actionAideTest;
     QMenuBar *menuBarre;
+    QMessageBox *aideMsgBox;
 
     QSignalMapper* signalMapper;
 
@@ -157,6 +159,7 @@ public:
         updateLanguage("FR");
 
         connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
+        connect(actionAideTest, SIGNAL(triggered()), this, SLOT(aide()));
 
         connect(actionLangueAnglais, SIGNAL(triggered()), signalMapper, SLOT(map()));
         connect(actionLangueFrancais, SIGNAL(triggered()), signalMapper, SLOT(map()));
@@ -179,7 +182,7 @@ public:
 
             actionOutilsTest->setText("&TestOutils");
             actionFenetreTest->setText("&TestFenetre");
-            actionAideTest->setText("&TestAide");
+            actionAideTest->setText("&A propos...");
             actionQuitter->setText("&Arrêter le programme");
             actionLangueAnglais->setText("&Anglais");
             actionLangueFrancais->setText("&Français");
@@ -194,7 +197,7 @@ public:
 
             actionOutilsTest->setText("&ToolsTest");
             actionFenetreTest->setText("&WindowTest");
-            actionAideTest->setText("&HelpTest");
+            actionAideTest->setText("&About...");
             actionQuitter->setText("&Quit");
             actionLangueAnglais->setText("&English");
             actionLangueFrancais->setText("&French");
@@ -268,6 +271,13 @@ private slots :
         }
         else
             qDebug() << "Langue " << language << " non reconnue !";
+    }
+
+    void aide()
+    {
+        aideMsgBox = new QMessageBox();
+        aideMsgBox->setText("L'aide sera disponible très prochainement. Merci de votre patience !");
+        aideMsgBox->setVisible(true);
     }
 
 };
