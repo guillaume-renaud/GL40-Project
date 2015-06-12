@@ -19,7 +19,7 @@ class QGroupBox;
 class QRadioButton;
 QT_END_NAMESPACE
 
-class InteractionFrame : public QWidget
+class InteractionFrame : public QWidget, public Observable
 {
     Q_OBJECT
 

@@ -144,7 +144,7 @@ public:
         gridLayout->addWidget(frameRight, 0, 2, 1, 1);
 
         interactionFrame = new InteractionFrame(frameRight);
-        interactionFrame->addObserver(interactionFrame);
+        interactionFrame->addObserver(paintingMesh);
 
         MainWindow->setCentralWidget(centralWidget);
         retranslateUi(MainWindow);
