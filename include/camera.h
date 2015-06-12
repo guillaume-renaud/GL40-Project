@@ -15,6 +15,7 @@
 #include <OpenGL/glu.h>
 #endif
 
+#include "observer.h"
 
 //#include <GL\freeglut.h>		// Need to include it here because the GL* types are required
 #define PI 3.1415926535897932384626433832795
@@ -36,7 +37,7 @@ struct SF2dVector
 
 SF3dVector F3dVector ( GLfloat x, GLfloat y, GLfloat z );
 
-class CCamera
+class CCamera : public Observable
 {
 private:
 

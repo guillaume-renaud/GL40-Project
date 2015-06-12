@@ -25,7 +25,7 @@ class QGroupBox;
 class QRadioButton;
 QT_END_NAMESPACE
 
-class ParamFrame : public QWidget
+class ParamFrame : public QWidget, public Observable
 {
     Q_OBJECT
 
@@ -251,6 +251,7 @@ private slots:
         } else if (displayLRadio->isChecked()) {
             pme->modeDisplay = 3;
         }
+        notify();
     }
 
 };

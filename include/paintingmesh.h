@@ -17,7 +17,7 @@
 #include <Node.h>
 
 using namespace components;
-class PaintingMesh : public QGLWidget
+class PaintingMesh : public QGLWidget, public IObserver
 {
     Q_OBJECT
 public:
@@ -512,6 +512,11 @@ public:
     }
 
     CCamera* getCamera() {return &this->camera;}
+
+    virtual void update()
+    {
+        updateGL();
+    }
 };
 
 
