@@ -13,6 +13,8 @@
 #include <QApplication>
 #include <QLabel>
 #include <QHBoxLayout>
+#include <QTimer>
+#include <QPushButton>
 
 QT_BEGIN_NAMESPACE
 class QGroupBox;
@@ -25,13 +27,17 @@ class InteractionFrame : public QWidget
 
 private:
 
+    QTimer* timer;
     QLabel *label;
     PaintingMesh *pme;
     QVBoxLayout *mainVerticalLayout;
+    QPushButton *startTimer, *stopTimer;
 
 public:
     explicit InteractionFrame(QFrame *parent = 0)
     {
+        timer = new QTimer();
+
         mainVerticalLayout = new QVBoxLayout(parent);
         mainVerticalLayout->setSpacing(6);
         mainVerticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -48,6 +54,16 @@ public:
         label->raise();
 
         mainVerticalLayout->addWidget(label);
+
+        startTimer = new QPushButton("Start traveling");
+        stopTimer = new QPushButton("Stop traveling");
+
+        mainVerticalLayout->addWidget(startTimer);
+        mainVerticalLayout->addWidget(stopTimer);
+
+        connect(startTimer, SIGNAL(clicked()), this, SLOT(startTraveling()));
+        connect(stopTimer, SIGNAL(clicked()), this, SLOT(stopTraveling()));
+        connect(timer, SIGNAL(timeout()), this, SLOT(traveling()));
     }
 
     ~InteractionFrame() {}
@@ -61,6 +77,22 @@ public:
         label->setText(QApplication::translate("MainWindow", txt, 0));
     }
 
+private slots :
+    void startTraveling()
+    {
+        timer->start();
+    }
+
+    void stopTraveling()
+    {
+        timer->stop();
+        qDebug() << "je travel plus !";
+    }
+
+    void traveling()
+    {
+        qDebug() << "je traveeeeeelllllll !";
+    }
 };
 
 
