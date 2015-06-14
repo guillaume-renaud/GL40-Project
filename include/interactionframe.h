@@ -55,8 +55,8 @@ public:
 
         mainVerticalLayout->addWidget(label);
 
-        startTimer = new QPushButton("Start traveling");
-        stopTimer = new QPushButton("Stop traveling");
+        startTimer = new QPushButton();
+        stopTimer = new QPushButton();
 
         mainVerticalLayout->addWidget(startTimer);
         mainVerticalLayout->addWidget(stopTimer);
@@ -76,6 +76,16 @@ public:
     {
         label->setText(QApplication::translate("MainWindow", txt, 0));
     }
+
+    void translateStartTimer(char* txt)
+    {
+        startTimer->setText(QApplication::translate("MainWindow", txt, 0));
+    }
+    void translateStopTimer(char* txt)
+    {
+        stopTimer->setText(QApplication::translate("MainWindow", txt, 0));
+    }
+
 
 private slots :
     void startTraveling()

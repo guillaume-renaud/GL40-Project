@@ -117,34 +117,40 @@ public:
         optionsGroupBox->setTitle(QApplication::translate("MainWindow", txt, 0));
     }
 
-    void translateOptionView1(char* txt)
+    void translateOptionView1(char* txt, char* tooltip)
     {
         optionView1->setText(QApplication::translate("MainWindow", txt, 0));
+        optionView1->setToolTip(tooltip);
     }
 
-    void translateOptionView2(char* txt)
+    void translateOptionView2(char* txt, char* tooltip)
     {
         optionView2->setText(QApplication::translate("MainWindow", txt, 0));
+        optionView2->setToolTip(tooltip);
     }
 
-    void translateOptionView3(char* txt)
+    void translateOptionView3(char* txt, char* tooltip)
     {
         optionView3->setText(QApplication::translate("MainWindow", txt, 0));
+        optionView3->setToolTip(tooltip);
     }
 
-    void translateOptionView4(char* txt)
+    void translateOptionView4(char* txt, char* tooltip)
     {
         optionView4->setText(QApplication::translate("MainWindow", txt, 0));
+        optionView4->setToolTip(tooltip);
     }
 
-    void translateOptionView5(char* txt)
+    void translateOptionView5(char* txt, char* tooltip)
     {
         optionView5->setText(QApplication::translate("MainWindow", txt, 0));
+        optionView5->setToolTip(tooltip);
     }
 
-    void translateOptionView6(char* txt)
+    void translateOptionView6(char* txt, char* tooltip)
     {
         optionView6->setText(QApplication::translate("MainWindow", txt, 0));
+        optionView6->setToolTip(tooltip);
     }
 
     void translateLabel(char* txt)

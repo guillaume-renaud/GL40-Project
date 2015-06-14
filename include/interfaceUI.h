@@ -49,11 +49,12 @@ public:
     InteractionFrame *interactionFrame;
 
     QMenu *menuFichier, *menuOutils, *menuFenetre, *menuLangue , *menuAide;
-    QAction *actionQuitter, *actionOutilsTest, *actionFenetreTest, *actionLangueAnglais, *actionLangueFrancais, *actionAideTest;
+    QAction *actionQuitter, *actionOutilsTest, *actionPleinEcran, *actionLangueAnglais, *actionLangueFrancais, *actionAPropos;
     QMenuBar *menuBarre;
     QMessageBox *aideMsgBox;
 
-    QSignalMapper* signalMapper;
+    QSignalMapper *signalMapper;
+    QMainWindow* MainWindowBis;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -63,7 +64,7 @@ public:
         MainWindow->resize(1000, 750);
         MainWindow->setAnimated(true);
 
-        menuBarre = new QMenuBar();
+        menuBarre = new QMenuBar(MainWindow);
 
         menuFichier = menuBarre->addMenu("");
         menuOutils = menuBarre->addMenu("");
@@ -74,18 +75,25 @@ public:
         actionQuitter = new QAction("", this);
         actionQuitter->setShortcut(QKeySequence("ctrl+Q"));
 
+        actionPleinEcran = new QAction("", this);
+        actionPleinEcran->setShortcut(QKeySequence("ctrl+shift+F"));
+
         actionOutilsTest = new QAction("", this);
-        actionFenetreTest = new QAction("", this);
+
         actionLangueAnglais = new QAction("", this);
+        actionLangueAnglais->setShortcut(QKeySequence("ctrl+shift+1"));
+
         actionLangueFrancais = new QAction("", this);
-        actionAideTest = new QAction("", this);
+        actionLangueFrancais->setShortcut(QKeySequence("ctrl+shift+2"));
+
+        actionAPropos = new QAction("", this);
 
         menuFichier->addAction(actionQuitter);
         menuOutils->addAction(actionOutilsTest);
-        menuFenetre->addAction(actionFenetreTest);
+        menuFenetre->addAction(actionPleinEcran);
         menuLangue->addAction(actionLangueAnglais);
         menuLangue->addAction(actionLangueFrancais);
-        menuAide->addAction(actionAideTest);
+        menuAide->addAction(actionAPropos);
 
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QString("centralWidget"));
@@ -102,7 +110,7 @@ public:
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
 
-        gridLayout->addWidget(frame, 0, 0, 1, 1);
+        gridLayout->addWidget(frame, 1, 0, 1, 1);
 
         paramFrame = new ParamFrame(frame);
 
@@ -113,7 +121,7 @@ public:
         frameBottom->setFrameShape(QFrame::StyledPanel);
         frameBottom->setFrameShadow(QFrame::Raised);
 
-        gridLayout->addWidget(frameBottom, 1, 0, 1, 0);
+        gridLayout->addWidget(frameBottom, 2, 0, 1, 0);
 
         optionFrame = new OptionFrame(frameBottom);
 
@@ -131,7 +139,7 @@ public:
 
         gridLayout_5->addWidget(paintingMesh);
 
-        gridLayout->addWidget(Mesh, 0, 1, 1, 1);
+        gridLayout->addWidget(Mesh, 1, 1, 1, 1);
 
         this->paintingMesh->getCamera()->addObserver(this->paintingMesh);
         this->optionFrame->setCamera(this->paintingMesh->getCamera());
@@ -143,7 +151,7 @@ public:
         frameRight->setFrameShape(QFrame::StyledPanel);
         frameRight->setFrameShadow(QFrame::Raised);
 
-        gridLayout->addWidget(frameRight, 0, 2, 1, 1);
+        gridLayout->addWidget(frameRight, 1, 2, 1, 1);
 
         interactionFrame = new InteractionFrame(frameRight);
 
@@ -152,20 +160,22 @@ public:
 
         QMetaObject::connectSlotsByName(MainWindow);
 
+        MainWindowBis = MainWindow;
+
         signalMapper = new QSignalMapper (this);
 
         updateMenuLanguage("FR");
         updateLanguage("FR");
 
         connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
-        connect(actionAideTest, SIGNAL(triggered()), this, SLOT(aide()));
+        connect(actionAPropos, SIGNAL(triggered()), this, SLOT(aide()));        
+
+        connect(actionPleinEcran, SIGNAL(triggered()), this, SLOT(pleinEcranSlot()));
 
         connect(actionLangueAnglais, SIGNAL(triggered()), signalMapper, SLOT(map()));
         connect(actionLangueFrancais, SIGNAL(triggered()), signalMapper, SLOT(map()));
-
         signalMapper -> setMapping(actionLangueAnglais, "EN");
         signalMapper -> setMapping(actionLangueFrancais, "FR");
-
         connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(updateLanguage(QString))) ;
     }
 
@@ -180,9 +190,9 @@ public:
             menuAide->setTitle("&Aide");
 
             actionOutilsTest->setText("&TestOutils");
-            actionFenetreTest->setText("&TestFenetre");
-            actionAideTest->setText("&A propos...");
-            actionQuitter->setText("&Arrêter le programme");
+            actionPleinEcran->setText("&Plein Ecran");
+            actionAPropos->setText("&A propos...");
+            actionQuitter->setText("&Arrêt");
             actionLangueAnglais->setText("&Anglais");
             actionLangueFrancais->setText("&Français");
         }
@@ -195,8 +205,8 @@ public:
             menuAide->setTitle("&Help");
 
             actionOutilsTest->setText("&ToolsTest");
-            actionFenetreTest->setText("&WindowTest");
-            actionAideTest->setText("&About...");
+            actionPleinEcran->setText("&Full Screen");
+            actionAPropos->setText("&About...");
             actionQuitter->setText("&Quit");
             actionLangueAnglais->setText("&English");
             actionLangueFrancais->setText("&French");
@@ -210,6 +220,7 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "POPIP Viewer ", 0));
     }
+
 
 private slots :
     void updateLanguage(QString language)
@@ -232,15 +243,18 @@ private slots :
             paramFrame->translateLabel((char*)"Affichage des\nparametres");
 
             optionFrame->translateOptionsGroupBox((char*) "Vues Prédéfinies");
-            optionFrame->translateOptionView1((char*) "Vue 1");
-            optionFrame->translateOptionView2((char*) "Vue 2");
-            optionFrame->translateOptionView3((char*) "Vue 3");
-            optionFrame->translateOptionView4((char*) "Vue 4");
-            optionFrame->translateOptionView5((char*) "Vue 5");
-            optionFrame->translateOptionView6((char*) "Vue 6");
+            optionFrame->translateOptionView1((char*) "Vue 1", (char*) "Vue de face");
+            optionFrame->translateOptionView2((char*) "Vue 2", (char*) "Vue du cote droit");
+            optionFrame->translateOptionView3((char*) "Vue 3", (char*) "Vue du dessus");
+            optionFrame->translateOptionView4((char*) "Vue 4", (char*) "Vue de derriere");
+            optionFrame->translateOptionView5((char*) "Vue 5", (char*) "Vue du cote gauche");
+            optionFrame->translateOptionView6((char*) "Vue 6", (char*) "Vue du dessous");
             optionFrame->translateLabel((char*) "Options de visualisation");
 
             interactionFrame->translateLabel((char*) "Intéractions");
+            interactionFrame->translateStartTimer((char*) "Début traveling");
+            interactionFrame->translateStopTimer((char*) "Arrêt traveling");
+
         }
         else if(language == "EN")
         {
@@ -258,15 +272,18 @@ private slots :
             paramFrame->translateLabel((char*)"Display\nparameters");
 
             optionFrame->translateOptionsGroupBox((char*) "Preset Views");
-            optionFrame->translateOptionView1((char*) "View 1");
-            optionFrame->translateOptionView2((char*) "View 2");
-            optionFrame->translateOptionView3((char*) "View 3");
-            optionFrame->translateOptionView4((char*) "View 4");
-            optionFrame->translateOptionView5((char*) "View 5");
-            optionFrame->translateOptionView6((char*) "View 6");
+            optionFrame->translateOptionView1((char*) "View 1", (char*) "Face view");
+            optionFrame->translateOptionView2((char*) "View 2", (char*) "Right view");
+            optionFrame->translateOptionView3((char*) "View 3", (char*) "Top view");
+            optionFrame->translateOptionView4((char*) "View 4", (char*) "Reverse view");
+            optionFrame->translateOptionView5((char*) "View 5", (char*) "Left view");
+            optionFrame->translateOptionView6((char*) "View 6", (char*) "Bottom view");
             optionFrame->translateLabel((char*) "Vizualisation options");
 
             interactionFrame->translateLabel((char*) "Interactions");
+            interactionFrame->translateStartTimer((char*) "Start traveling");
+            interactionFrame->translateStopTimer((char*) "Stop traveling");
+
         }
         else
             qDebug() << "Langue " << language << " non reconnue !";
@@ -279,6 +296,11 @@ private slots :
         aideMsgBox->setVisible(true);
     }
 
+    void pleinEcranSlot()
+    {
+        MainWindowBis->setWindowState(MainWindowBis->windowState() ^ Qt::WindowFullScreen);
+
+    }
 };
 
 namespace Ui {
