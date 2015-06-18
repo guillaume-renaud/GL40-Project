@@ -79,7 +79,6 @@ public:
         label->setText(QApplication::translate("MainWindow", txt, 0));
     }
 
-<<<<<<< HEAD
     void setCamera(CCamera* camera){
         this->camera = camera;
     }
@@ -89,7 +88,6 @@ public:
         return this->timer;
     }
 
-=======
     void translateStartTimer(char* txt)
     {
         startTimer->setText(QApplication::translate("MainWindow", txt, 0));
@@ -100,7 +98,6 @@ public:
     }
 
 
->>>>>>> ec2f5a63428b60478e0995245cacf2d6e9a12a29
 private slots :
     void startTraveling()
     {
