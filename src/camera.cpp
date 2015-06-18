@@ -75,9 +75,14 @@ float operator* (SF3dVector v, SF3dVector u)	//dot product
 
 CCamera::CCamera()
 {
+    init();
+}
+
+void CCamera::init()
+{
     //Init with standard OGL values:
 
-    Position = F3dVector (0.0, 0.0,	0.0);
+    Position = F3dVector (0.0, 0.0,	3.0);
     ViewDir = F3dVector( 0.0, 0.0, -1.0);
     RightVector = F3dVector (1.0, 0.0, 0.0);
     UpVector = F3dVector (0.0, 1.0, 0.0);
@@ -86,6 +91,7 @@ CCamera::CCamera()
 
     //Only to be sure:
     RotatedX = RotatedY = RotatedZ = 0.0;
+    notify();
 }
 
 void CCamera::Move (SF3dVector Direction)
@@ -133,6 +139,7 @@ void CCamera::RotateZ (GLfloat Angle)
 
 void CCamera::RotateObjectX (GLfloat Angle)
 {
+    Position.z -= 4;
     Angle /= 10.0;
     RotatedX += Angle;
 
@@ -157,10 +164,14 @@ void CCamera::RotateObjectX (GLfloat Angle)
 
     //now compute the new UpVector (by cross product)
     UpVector = CrossProduct(&ViewDir, &RightVector)*-1;
+    Position.z += 4;
+    if (this->RotatedX > 360.0f)
+        this->RotatedX = 0.0f;
 }
 
 void CCamera::RotateObjectY (GLfloat Angle)
 {
+    Position.z -= 4;
     Angle /= 10.0;
     RotatedY += Angle;
 
@@ -185,10 +196,14 @@ void CCamera::RotateObjectY (GLfloat Angle)
 
     //now compute the new RightVector (by cross product)
     RightVector = CrossProduct(&ViewDir, &UpVector);
+    Position.z += 4;
+    if (this->RotatedY > 360.0f)
+        this->RotatedY = 0.0f;
 }
 
 void CCamera::Render( void )
 {
+    std::cout<<this->RotatedX<<" | "<<this->RotatedY<<" | "<<this->RotatedZ<<std::endl;
     //The point at which the camera looks:
     SF3dVector ViewPoint = Position+ViewDir;
 
@@ -213,23 +228,18 @@ void CCamera::MoveUpward( GLfloat Distance )
     Position = Position + (UpVector*Distance);
 }
 
-void CCamera::LookAt(GLfloat x, GLfloat y, GLfloat z, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat focusX, GLfloat focusY, GLfloat focusZ)
+
+GLfloat CCamera::getRotatedX()
 {
-    this->Position.x = x;
-    this->Position.y = y;
-    this->Position.z = z;
+    return this->RotatedX;
+}
 
-    this->UpVector.x = upX;
-    this->UpVector.y = upY;
-    this->UpVector.z = upZ;
+GLfloat CCamera::getRotatedY()
+{
+    return this->RotatedY;
+}
 
-    this->ViewDir.x = focusX;
-    this->ViewDir.y = focusY;
-    this->ViewDir.z = focusZ;
-
-    this->RotatedX = 0;
-    this->RotatedY = 0;
-    this->RotatedZ = 0;
-
-    notify();
+GLfloat CCamera::getRotatedZ()
+{
+    return this->RotatedZ;
 }

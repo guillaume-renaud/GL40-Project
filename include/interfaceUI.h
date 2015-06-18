@@ -63,7 +63,7 @@ public:
         MainWindow->resize(1000, 750);
         MainWindow->setAnimated(true);
 
-        menuBarre = new QMenuBar();
+        menuBarre = new QMenuBar(MainWindow);
 
         menuFichier = menuBarre->addMenu("");
         menuOutils = menuBarre->addMenu("");
@@ -147,6 +147,8 @@ public:
 
         interactionFrame = new InteractionFrame(frameRight);
         interactionFrame->addObserver(paintingMesh);
+        interactionFrame->setCamera(this->paintingMesh->getCamera());
+        optionFrame->setInteractionFrame(this->interactionFrame);
 
         MainWindow->setCentralWidget(centralWidget);
         retranslateUi(MainWindow);

@@ -7,12 +7,15 @@
 #include <QWidget>
 
 #include "paintingmesh.h"
+#include "interactionframe.h"
 #include <QGroupBox>
 #include <QHeaderView>
 #include <QPushButton>
 #include <QApplication>
 #include <QLabel>
 #include <QHBoxLayout>
+#include <QTimer>
+#include <chrono>
 
 QT_BEGIN_NAMESPACE
 class QGroupBox;
@@ -32,6 +35,13 @@ private:
     QGridLayout *gridLayout;
     QPushButton *optionView1, *optionView2, *optionView3, *optionView4, *optionView5, *optionView6;
     CCamera* camera;
+    QTimer* timer;
+    GLfloat focusX;
+    GLfloat focusY;
+    GLfloat dx;
+    GLfloat dy;
+    std::chrono::time_point<std::chrono::high_resolution_clock> time;
+    InteractionFrame* interactionFrame;
 
 public:
     explicit OptionFrame(QFrame *parent = 0)
@@ -90,6 +100,8 @@ public:
         gridLayout->addWidget(optionView5, 1, 1);
         gridLayout->addWidget(optionView6, 1, 2);
 
+        timer = new QTimer();
+
         connect(optionView1, SIGNAL(clicked()), this, SLOT(view1()));
         optionView1->setShortcut(QKeySequence("1"));
         connect(optionView2, SIGNAL(clicked()), this, SLOT(view2()));
@@ -102,6 +114,7 @@ public:
         optionView5->setShortcut(QKeySequence("5"));
         connect(optionView6, SIGNAL(clicked()), this, SLOT(view6()));
         optionView6->setShortcut(QKeySequence("6"));
+        connect(timer, SIGNAL(timeout()), this, SLOT(moveCamera()));
     }
 
     ~OptionFrame() {}
@@ -152,31 +165,93 @@ public:
         label->setText(QApplication::translate("MainWindow", txt, 0));
     }
 
+    void setInteractionFrame(InteractionFrame* interactionFrame)
+    {
+        this->interactionFrame = interactionFrame;
+    }
+
 private slots:
 
     void view1()
     {
-        this->camera->LookAt(0, 0, 0, 0, 1, 0, 0, 0, -1);
+        this->interactionFrame->getTimerTravling()->stop();
+        this->time = std::chrono::high_resolution_clock::now();
+        this->camera->init();
+        this->focusX = 0.0f;
+        this->focusY = 0.0f;
+        this->dx = (this->focusX - this->camera->getRotatedX())/4.0f;
+        this->dy = (this->focusY - this->camera->getRotatedY())/4.0f;
+        this->timer->start();
     }
     void view2()
     {
-        this->camera->LookAt(10, 0, -6, 0, 1, 0, -1, 0, 0);
+        this->interactionFrame->getTimerTravling()->stop();
+        this->time = std::chrono::high_resolution_clock::now();
+        this->camera->init();
+        this->focusX = 0.0f;
+        this->focusY = 65.0f;
+        this->dx = (this->focusX - this->camera->getRotatedX())/4.0f;
+        this->dy = (this->focusY - this->camera->getRotatedY())/4.0f;
+        this->timer->start();
     }
     void view3()
     {
-        this->camera->LookAt(0, 10.1, -6, 0, 1, 0, 0, -1, 0.1);
+        this->interactionFrame->getTimerTravling()->stop();
+        this->time = std::chrono::high_resolution_clock::now();
+        this->camera->init();
+        this->focusX = -65.0f;
+        this->focusY = 0.0f;
+        this->dx = (this->focusX - this->camera->getRotatedX())/4.0f;
+        this->dy = (this->focusY - this->camera->getRotatedY())/4.0f;
+        this->timer->start();
     }
     void view4()
     {
-        this->camera->LookAt(0, 0, -10, 0, 1, 0, 0, 0, 1);
+        this->interactionFrame->getTimerTravling()->stop();
+        this->time = std::chrono::high_resolution_clock::now();
+        this->camera->init();
+        this->focusX = 0.0f;
+        this->focusY = 130.0f;
+        this->dx = (this->focusX - this->camera->getRotatedX())/4.0f;
+        this->dy = (this->focusY - this->camera->getRotatedY())/4.0f;
+        this->timer->start();
     }
     void view5()
     {
-        this->camera->LookAt(-10, 0, -6, 0, 1, 0, 1, 0, 0);
+        this->interactionFrame->getTimerTravling()->stop();
+        this->time = std::chrono::high_resolution_clock::now();
+        this->camera->init();
+        this->focusX = 0.0f;
+        this->focusY = -65.0f;
+        this->dx = (this->focusX - this->camera->getRotatedX())/4.0f;
+        this->dy = (this->focusY - this->camera->getRotatedY())/4.0f;
+        this->timer->start();
     }
     void view6()
     {
-        this->camera->LookAt(0, -10.1, -6, 0, 1, 0, 0, 1, 0.1);
+        this->interactionFrame->getTimerTravling()->stop();
+        this->time = std::chrono::high_resolution_clock::now();
+        this->camera->init();
+        this->focusX = 65.0f;
+        this->focusY = 0.0f;
+        this->dx = (this->focusX - this->camera->getRotatedX())/4.0f;
+        this->dy = (this->focusY - this->camera->getRotatedY())/4.0f;
+        this->timer->start();
+    }
+
+    void moveCamera()
+    {
+        if (std::chrono::duration_cast<std::chrono::milliseconds> (std::chrono::high_resolution_clock::now()-time).count() <= 500)
+            return;
+        this->camera->RotateObjectX(dx);
+        if (this->focusX - 0.3 < this->camera->getRotatedX() && this->camera->getRotatedX() < this->focusX + 0.3)
+        {
+            this->camera->RotateObjectY(dy);
+
+            if (this->focusY - 0.1 < this->camera->getRotatedY() && this->camera->getRotatedY() < this->focusY + 0.1)
+                this->timer->stop();
+        }
+        this->camera->notify();
     }
 };
 
