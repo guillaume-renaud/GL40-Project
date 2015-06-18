@@ -33,7 +33,6 @@
 
 class Ui_MainWindow : public QWidget
 {
-
     Q_OBJECT
 
 public:
@@ -49,12 +48,12 @@ public:
     InteractionFrame *interactionFrame;
 
     QMenu *menuFichier, *menuOutils, *menuFenetre, *menuLangue , *menuAide;
-    QAction *actionQuitter, *actionOutilsTest, *actionPleinEcran, *actionLangueAnglais, *actionLangueFrancais, *actionAPropos;
+    QAction *actionQuitter, *actionFigerEcran, *actionPleinEcran, *actionLangueAnglais, *actionLangueFrancais, *actionAPropos;
     QMenuBar *menuBarre;
     QMessageBox *aideMsgBox;
 
     QSignalMapper *signalMapper;
-    QMainWindow* MainWindowBis;
+    QMainWindow* mainWindow;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -78,7 +77,7 @@ public:
         actionPleinEcran = new QAction("", this);
         actionPleinEcran->setShortcut(QKeySequence("ctrl+shift+F"));
 
-        actionOutilsTest = new QAction("", this);
+        actionFigerEcran = new QAction("", this);
 
         actionLangueAnglais = new QAction("", this);
         actionLangueAnglais->setShortcut(QKeySequence("ctrl+shift+1"));
@@ -89,7 +88,7 @@ public:
         actionAPropos = new QAction("", this);
 
         menuFichier->addAction(actionQuitter);
-        menuOutils->addAction(actionOutilsTest);
+        menuOutils->addAction(actionFigerEcran);
         menuFenetre->addAction(actionPleinEcran);
         menuLangue->addAction(actionLangueAnglais);
         menuLangue->addAction(actionLangueFrancais);
@@ -160,7 +159,7 @@ public:
 
         QMetaObject::connectSlotsByName(MainWindow);
 
-        MainWindowBis = MainWindow;
+        mainWindow = MainWindow;
 
         signalMapper = new QSignalMapper (this);
 
@@ -168,7 +167,9 @@ public:
         updateLanguage("FR");
 
         connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
-        connect(actionAPropos, SIGNAL(triggered()), this, SLOT(aide()));        
+        connect(actionAPropos, SIGNAL(triggered()), this, SLOT(aide()));
+
+        connect(actionFigerEcran, SIGNAL(triggered()), this, SLOT(figerVueSlot()));
 
         connect(actionPleinEcran, SIGNAL(triggered()), this, SLOT(pleinEcranSlot()));
 
@@ -189,7 +190,7 @@ public:
             menuLangue->setTitle("&Langue");
             menuAide->setTitle("&Aide");
 
-            actionOutilsTest->setText("&TestOutils");
+            actionFigerEcran->setText("&Figer Vue");
             actionPleinEcran->setText("&Plein Ecran");
             actionAPropos->setText("&A propos...");
             actionQuitter->setText("&Arrêt");
@@ -204,7 +205,7 @@ public:
             menuLangue->setTitle("&Language");
             menuAide->setTitle("&Help");
 
-            actionOutilsTest->setText("&ToolsTest");
+            actionFigerEcran->setText("&Freeze View");
             actionPleinEcran->setText("&Full Screen");
             actionAPropos->setText("&About...");
             actionQuitter->setText("&Quit");
@@ -298,9 +299,14 @@ private slots :
 
     void pleinEcranSlot()
     {
-        MainWindowBis->setWindowState(MainWindowBis->windowState() ^ Qt::WindowFullScreen);
+        mainWindow->setWindowState(mainWindow->windowState() ^ Qt::WindowFullScreen);
+    }
+
+    void figerVueSlot()
+    {
 
     }
+
 };
 
 namespace Ui {
