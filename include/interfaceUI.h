@@ -153,6 +153,9 @@ public:
         gridLayout->addWidget(frameRight, 1, 2, 1, 1);
 
         interactionFrame = new InteractionFrame(frameRight);
+        interactionFrame->addObserver(paintingMesh);
+        interactionFrame->setCamera(this->paintingMesh->getCamera());
+        optionFrame->setInteractionFrame(this->interactionFrame);
 
         MainWindow->setCentralWidget(centralWidget);
         retranslateUi(MainWindow);

@@ -21,7 +21,7 @@ class QGroupBox;
 class QRadioButton;
 QT_END_NAMESPACE
 
-class InteractionFrame : public QWidget
+class InteractionFrame : public QWidget, public Observable
 {
     Q_OBJECT
 
@@ -32,6 +32,8 @@ private:
     PaintingMesh *pme;
     QVBoxLayout *mainVerticalLayout;
     QPushButton *startTimer, *stopTimer;
+
+    CCamera* camera;
 
 public:
     explicit InteractionFrame(QFrame *parent = 0)
@@ -82,6 +84,15 @@ public:
         label->setText(QApplication::translate("MainWindow", txt, 0));
     }
 
+    void setCamera(CCamera* camera){
+        this->camera = camera;
+    }
+
+    QTimer* getTimerTravling()
+    {
+        return this->timer;
+    }
+
     void translateStartTimer(char* txt)
     {
         startTimer->setText(QApplication::translate("MainWindow", txt, 0));
@@ -101,12 +112,12 @@ private slots :
     void stopTraveling()
     {
         timer->stop();
-        qDebug() << "je travel plus !";
     }
 
     void traveling()
     {
-        qDebug() << "je traveeeeeelllllll !";
+        this->camera->RotateObjectY(5);
+        notify();
     }
 };
 

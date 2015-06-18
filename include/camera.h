@@ -54,6 +54,8 @@ public:
     void Render ( void );	//executes some glRotates and a glTranslate command
     //Note: You should call glLoadIdentity before using Render
 
+    void init();
+
     void Move ( SF3dVector Direction );
     void RotateX ( GLfloat Angle );
     void RotateY ( GLfloat Angle );
@@ -66,8 +68,9 @@ public:
     void MoveUpward ( GLfloat Distance );
     void StrafeRight ( GLfloat Distance );
 
-    void LookAt(GLfloat x, GLfloat y, GLfloat z, GLfloat upX, GLfloat upY, GLfloat upZ, GLfloat focusX, GLfloat focusY, GLfloat focusZ);
-
+    GLfloat getRotatedX();
+    GLfloat getRotatedY();
+    GLfloat getRotatedZ();
 };
 
 #endif
