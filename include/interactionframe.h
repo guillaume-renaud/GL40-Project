@@ -56,7 +56,12 @@ public:
         mainVerticalLayout->addWidget(label);
 
         startTimer = new QPushButton();
+        startTimer->setMinimumSize(40,40);
+        startTimer->setMaximumSize(200,200);
+
         stopTimer = new QPushButton();
+        stopTimer->setMinimumSize(40,40);
+        stopTimer->setMaximumSize(200,200);
 
         mainVerticalLayout->addWidget(startTimer);
         mainVerticalLayout->addWidget(stopTimer);

@@ -30,7 +30,7 @@ private:
     QHBoxLayout *mainHorizontalLayout;
     QGroupBox *optionsGroupBox;
     QGridLayout *gridLayout;
-    QPushButton *optionView1, *optionView2, *optionView3, *optionView4, *optionView5, *optionView6;
+    QPushButton *optionView1, *optionView2, *optionView3, *optionView4, *optionView5, *optionView6, *resetView;
     CCamera* camera;
 
 public:
@@ -43,7 +43,7 @@ public:
 
         label = new QLabel(parent);
         label->setObjectName(QString("label"));
-        label->setMaximumSize(QSize(250, 79));
+        label->setMaximumSize(QSize(150, 79));
 
         QFont font;
         font.setPointSize(15);
@@ -66,21 +66,33 @@ public:
 
         optionView1 = new QPushButton(optionsGroupBox);
         optionView1->setObjectName(QString("radioButton_View1"));
+        optionView1->setMinimumSize(40,40);
+        optionView1->setMaximumSize(200,200);
 
         optionView2 = new QPushButton(optionsGroupBox);
         optionView2->setObjectName(QString("radioButton_View2"));
+        optionView2->setMinimumSize(40,40);
+        optionView2->setMaximumSize(200,200);
 
         optionView3 = new QPushButton(optionsGroupBox);
         optionView3->setObjectName(QString("radioButton_View3"));
+        optionView3->setMinimumSize(40,40);
+        optionView3->setMaximumSize(200,200);
 
         optionView4 = new QPushButton(optionsGroupBox);
         optionView4->setObjectName(QString("radioButton_View4"));
+        optionView4->setMinimumSize(40,40);
+        optionView4->setMaximumSize(200,200);
 
         optionView5 = new QPushButton(optionsGroupBox);
         optionView5->setObjectName(QString("radioButton_View5"));
+        optionView5->setMinimumSize(40,40);
+        optionView5->setMaximumSize(200,200);
 
         optionView6 = new QPushButton(optionsGroupBox);
         optionView6->setObjectName(QString("radioButton_View6"));
+        optionView6->setMinimumSize(40,40);
+        optionView6->setMaximumSize(200,200);
 
         optionView1->setChecked(true);
         gridLayout->addWidget(optionView1, 0, 0);
@@ -89,6 +101,13 @@ public:
         gridLayout->addWidget(optionView4, 1, 0);
         gridLayout->addWidget(optionView5, 1, 1);
         gridLayout->addWidget(optionView6, 1, 2);
+
+        resetView = new QPushButton(optionsGroupBox);
+        resetView->setObjectName(QString("radioButton_ResetView"));
+        resetView->setMinimumSize(40,40);
+        resetView->setMaximumSize(200,200);
+
+        mainHorizontalLayout->addWidget(resetView);
 
         connect(optionView1, SIGNAL(clicked()), this, SLOT(view1()));
         optionView1->setShortcut(QKeySequence("1"));
@@ -102,6 +121,8 @@ public:
         optionView5->setShortcut(QKeySequence("5"));
         connect(optionView6, SIGNAL(clicked()), this, SLOT(view6()));
         optionView6->setShortcut(QKeySequence("6"));
+        connect(resetView, SIGNAL(clicked()), this, SLOT(resetViewSlot()));
+        resetView->setShortcut(QKeySequence("0"));
     }
 
     ~OptionFrame() {}
@@ -153,6 +174,12 @@ public:
         optionView6->setToolTip(tooltip);
     }
 
+    void translateResetView(char* txt, char* tooltip)
+    {
+        resetView->setText(QApplication::translate("MainWindow", txt, 0));
+        resetView->setToolTip(tooltip);
+    }
+
     void translateLabel(char* txt)
     {
         label->setText(QApplication::translate("MainWindow", txt, 0));
@@ -183,6 +210,10 @@ private slots:
     void view6()
     {
         this->camera->LookAt(0, -10.1, -6, 0, 1, 0, 0, 1, 0.1);
+    }
+    void resetViewSlot()
+    {
+        this->camera->LookAt(0, 0, 0, 0, 1, 0, 0, 0, -1);
     }
 };
 

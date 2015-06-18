@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Ui_MainWindow_t {
     QByteArrayData data[7];
-    char stringdata[72];
+    char stringdata[76];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,13 +33,13 @@ QT_MOC_LITERAL(0, 0, 13), // "Ui_MainWindow"
 QT_MOC_LITERAL(1, 14, 14), // "updateLanguage"
 QT_MOC_LITERAL(2, 29, 0), // ""
 QT_MOC_LITERAL(3, 30, 8), // "language"
-QT_MOC_LITERAL(4, 39, 4), // "aide"
-QT_MOC_LITERAL(5, 44, 14), // "pleinEcranSlot"
-QT_MOC_LITERAL(6, 59, 12) // "figerVueSlot"
+QT_MOC_LITERAL(4, 39, 8), // "aideSlot"
+QT_MOC_LITERAL(5, 48, 14), // "pleinEcranSlot"
+QT_MOC_LITERAL(6, 63, 12) // "figerVueSlot"
 
     },
     "Ui_MainWindow\0updateLanguage\0\0language\0"
-    "aide\0pleinEcranSlot\0figerVueSlot"
+    "aideSlot\0pleinEcranSlot\0figerVueSlot"
 };
 #undef QT_MOC_LITERAL
 
@@ -77,7 +77,7 @@ void Ui_MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         Ui_MainWindow *_t = static_cast<Ui_MainWindow *>(_o);
         switch (_id) {
         case 0: _t->updateLanguage((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 1: _t->aide(); break;
+        case 1: _t->aideSlot(); break;
         case 2: _t->pleinEcranSlot(); break;
         case 3: _t->figerVueSlot(); break;
         default: ;

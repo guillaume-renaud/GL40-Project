@@ -158,7 +158,6 @@ public:
         retranslateUi(MainWindow);
 
         QMetaObject::connectSlotsByName(MainWindow);
-
         mainWindow = MainWindow;
 
         signalMapper = new QSignalMapper (this);
@@ -167,10 +166,8 @@ public:
         updateLanguage("FR");
 
         connect(actionQuitter, SIGNAL(triggered()), qApp, SLOT(quit()));
-        connect(actionAPropos, SIGNAL(triggered()), this, SLOT(aide()));
-
+        connect(actionAPropos, SIGNAL(triggered()), this, SLOT(aideSlot()));
         connect(actionFigerEcran, SIGNAL(triggered()), this, SLOT(figerVueSlot()));
-
         connect(actionPleinEcran, SIGNAL(triggered()), this, SLOT(pleinEcranSlot()));
 
         connect(actionLangueAnglais, SIGNAL(triggered()), signalMapper, SLOT(map()));
@@ -250,12 +247,12 @@ private slots :
             optionFrame->translateOptionView4((char*) "Vue 4", (char*) "Vue de derriere");
             optionFrame->translateOptionView5((char*) "Vue 5", (char*) "Vue du cote gauche");
             optionFrame->translateOptionView6((char*) "Vue 6", (char*) "Vue du dessous");
-            optionFrame->translateLabel((char*) "Options de visualisation");
+            optionFrame->translateResetView((char*) "Réinitialiser Vue", (char*) "Vue de départ");
+            optionFrame->translateLabel((char*) "Options de\nvisualisation");
 
             interactionFrame->translateLabel((char*) "Intéractions");
             interactionFrame->translateStartTimer((char*) "Début traveling");
             interactionFrame->translateStopTimer((char*) "Arrêt traveling");
-
         }
         else if(language == "EN")
         {
@@ -279,18 +276,18 @@ private slots :
             optionFrame->translateOptionView4((char*) "View 4", (char*) "Reverse view");
             optionFrame->translateOptionView5((char*) "View 5", (char*) "Left view");
             optionFrame->translateOptionView6((char*) "View 6", (char*) "Bottom view");
-            optionFrame->translateLabel((char*) "Vizualisation options");
+            optionFrame->translateResetView((char*) "Reset View", (char*) "Starting view");
+            optionFrame->translateLabel((char*) "Vizualisation\noptions");
 
             interactionFrame->translateLabel((char*) "Interactions");
             interactionFrame->translateStartTimer((char*) "Start traveling");
             interactionFrame->translateStopTimer((char*) "Stop traveling");
-
         }
         else
             qDebug() << "Langue " << language << " non reconnue !";
     }
 
-    void aide()
+    void aideSlot()
     {
         aideMsgBox = new QMessageBox();
         aideMsgBox->setText("L'aide sera disponible très prochainement. Merci de votre patience !");
